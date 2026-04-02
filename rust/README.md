@@ -37,7 +37,7 @@ Step 1: play
 OLLAMA_FLASH_ATTENTION="1" OLLAMA_KV_CACHE_TYPE="q8_0" /opt/homebrew/opt/ollama/bin/ollama serve
 
 # shell 2: point claw cli to local
-export ANTHROPIC_BASE_URL="http://localhost:11434"
+export ANTHROPIC_BASE_URL="http://localhost:11434/v1"
 export ANTHROPIC_API_KEY="ollama"
 
 # start claw
