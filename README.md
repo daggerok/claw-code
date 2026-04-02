@@ -1,3 +1,52 @@
+# claw local ollama deepseek-coder-v2
+
+Step 0: setup
+
+```bash
+# open shell 1 and install required software
+brew reinstall rustup python ollama
+rustup default stable
+rustup update stable
+python3 --version
+cargo --version
+
+# run ollama
+OLLAMA_FLASH_ATTENTION="1" OLLAMA_KV_CACHE_TYPE="q8_0" /opt/homebrew/opt/ollama/bin/ollama serve
+
+# open shell 2 and pull needed models
+ollama --version
+ollama pull qwen2.5-coder:7
+ollama pull qwen2.5-coder:14b
+ollama pull deepseek-coder-v2
+ollama list
+
+# clone the repo
+git clone https://github.com/instructkr/claw-code.git
+cd claw-code
+cd rust
+
+# build claw cli
+cargo build --release
+cargo fix --lib -p runtime
+```
+
+Step 1: play
+
+```bash
+# shell 1: run ollama
+OLLAMA_FLASH_ATTENTION="1" OLLAMA_KV_CACHE_TYPE="q8_0" /opt/homebrew/opt/ollama/bin/ollama serve
+
+# shell 2: point claw cli to local
+export ANTHROPIC_BASE_URL="http://localhost:11434"
+export ANTHROPIC_API_KEY="ollama"
+
+# start claw
+cd claw-code
+./rust/target/release/claw --model deepseek-coder-v2 # and then in opened shell run command: /status 
+```
+
+<!-- Original README.md file: -->
+
 # Rewriting Project Claw Code
 
 <p align="center">
